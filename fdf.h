@@ -6,12 +6,11 @@
 /*   By: waddam <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 00:24:13 by waddam            #+#    #+#             */
-/*   Updated: 2020/02/25 23:28:25 by waddam           ###   ########.fr       */
+/*   Updated: 2020/02/29 00:47:39 by waddam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
-
 # define FDF_H
 
 # define HEIGHT		1080
@@ -19,7 +18,7 @@
 # include <fcntl.h>
 # include "mlx.h"
 # include "libft/libft.h"
-# include "get_next_line.h"
+# include "gnl/get_next_line.h"
 
 typedef struct			s_point
 {
