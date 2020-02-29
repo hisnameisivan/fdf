@@ -1,0 +1,11 @@
+*.o
+*.d
+*.a
+*.out
+fdf
+*.dSYM/
+.vscode/
+del/
+libft/.DS_Store
+.DS_Store
+test.c
