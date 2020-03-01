@@ -6,6 +6,11 @@ fdf
 *.dSYM/
 .vscode/
 del/
+libft/*.o
+libft/*.d
 libft/.DS_Store
+gnl/*.o
+gnl/*.d
+gnl/*.DS_Store
 .DS_Store
 test.c
