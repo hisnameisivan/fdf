@@ -6,12 +6,13 @@
 #    By: waddam <waddam@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/28 23:48:43 by waddam            #+#    #+#              #
-#    Updated: 2020/03/02 00:57:18 by waddam           ###   ########.fr        #
+#    Updated: 2020/03/03 23:09:06 by waddam           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 SRC = src/main.c\
+	  src/additions.c\
 	  src/parsing.c\
 	  src/point.c\
 	  src/read_map.c\
