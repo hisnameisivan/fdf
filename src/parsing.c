@@ -6,11 +6,12 @@
 /*   By: waddam <waddam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/01 22:59:12 by waddam            #+#    #+#             */
-/*   Updated: 2020/03/02 01:03:29 by waddam           ###   ########.fr       */
+/*   Updated: 2020/03/04 00:38:16 by waddam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
+// #include "../includes/fdf.h"
 
 static void	pre_isnan(const char **str, int base)
 {
@@ -66,10 +67,11 @@ static int	check_z(char *z_str, int *z_val, int *color)
 		return (-1);
 	*z_val = ft_atoi(z_data[0]);
 	*color = z_data[1] ? ft_atoi_base(z_data[1], 16) : -1;
+	free_multiline(&z_data);
 	return (0);
 }
 
-int			parsing(char **z_line, t_point **begin, int *cnt_pnts, t_map *map)
+int			parsing(char **z_line, t_point **begin, t_map *map)
 {
 	int		width;
 	int		color;
@@ -90,7 +92,6 @@ int			parsing(char **z_line, t_point **begin, int *cnt_pnts, t_map *map)
 		}
 		width++;
 	}
-	*cnt_pnts += width;
 	if (map->height == 0)
 		map->width = width;
 	if (map->width != width)
