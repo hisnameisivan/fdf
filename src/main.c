@@ -6,11 +6,12 @@
 /*   By: waddam <waddam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 00:24:16 by waddam            #+#    #+#             */
-/*   Updated: 2020/03/02 01:06:37 by waddam           ###   ########.fr       */
+/*   Updated: 2020/03/04 00:50:57 by waddam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
+// #include "../includes/fdf.h"
 
 void	panic(char *msg)
 {
@@ -40,6 +41,7 @@ int		init_settings(t_params *set)
 int		main(int argc, char **argv)
 {
 	int			fd;
+	t_point		*points;
 	t_map		map;
 	t_params	params;
 
@@ -48,13 +50,13 @@ int		main(int argc, char **argv)
 		if (!(fd = open(argv[1], O_RDONLY)))
 			panic("ERROR: could not open input file");
 		init_map(&map, sizeof(t_map));
-		if (read_map(fd, &map) == -1)
+		if (!(points = read_map(fd, &map)))
 			panic("ERROR: could not read input file");
 		if (init_settings(&params) == -1)
 			panic("ERROR: failed to initialize settings");
 	}
 	else
 		panic("Usage ./fdf <path_to_map/map_name>");
-	// ft_putendl("debug");
+	ft_putendl("debug");
 	return (0);
 }
