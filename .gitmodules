@@ -2,7 +2,7 @@
 	path = libft
 	url = git@github.com:hisnameisivan/libft.git
 	branch = fdf-version
-[submodule "gnl"]
-	path = gnl
-	url = git@github.com:hisnameisivan/get_next_line.git
-	branch = master
+# [submodule "gnl"]
+# 	path = gnl
+# 	url = git@github.com:hisnameisivan/get_next_line.git
+# 	branch = master
