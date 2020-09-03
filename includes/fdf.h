@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waddam <waddam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ivan <ivan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 00:24:13 by waddam            #+#    #+#             */
-/*   Updated: 2020/03/04 00:48:33 by waddam           ###   ########.fr       */
+/*   Updated: 2020/09/02 16:39:04 by ivan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 # define HEIGHT		1080
 # define WIDTH		1920
 # include <fcntl.h>
-# include "mlx.h"
+// # include "../minilibx/mlx.h"
+# include <Xlib.h>
+# include <XShm.h>
+# include <mlx.h>
 # include <libft.h>
-# include <get_next_line.h>
+// # include <get_next_line.h>
 # include <stdio.h>
 // # include "../libft/libft.h"
 // # include "../gnl/get_next_line.h"
