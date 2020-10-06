@@ -3,35 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waddam <waddam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ivan <ivan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/19 00:11:13 by waddam            #+#    #+#             */
-/*   Updated: 2020/03/04 00:51:42 by waddam           ###   ########.fr       */
+/*   Created: 2020/02/19 00:11:13 by draudrau          #+#    #+#             */
+/*   Updated: 2020/09/30 03:17:57 by ivan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
-// #include "../includes/fdf.h"
 
-t_point		*read_map(int fd, t_map *map)
+static void	clean(char **line, char ***z_line)
+{
+	free_multiline(z_line);
+	ft_strdel(line);
+}
+
+int			read_map(int fd, t_map *map, t_point **points)
 {
 	int		res;
 	char	*line;
 	char	**z_line;
-	t_point	*points;
 
 	line = NULL;
 	while ((res = get_next_line(fd, &line)) > 0)
 	{
-		if (!(z_line = ft_strsplit(line, ' ')))
+		if ((z_line = ft_strsplit(line, ' ')) != NULL)
+		{
+			if (parsing(z_line, points, map) == -1)
+			{
+				clean(&line, &z_line);
+				return (-1);
+			}
+			clean(&line, &z_line);
+		}
+		else
 			break ;
-		if (parsing(z_line, &points, map) == -1)
-			return (NULL);
-		map->height++;
-		free_multiline(&z_line);
-		ft_strdel(&line);
 	}
+	(line != NULL) ? free(line) : (line = NULL);
 	if (res < 0 || map->width == 0)
-		return (NULL);
-	return (points);
+		return (-1);
+	return (0);
 }

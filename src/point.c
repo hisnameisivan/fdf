@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   point.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waddam <waddam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ivan <ivan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 00:56:04 by waddam            #+#    #+#             */
-/*   Updated: 2020/03/02 00:56:53 by waddam           ###   ########.fr       */
+/*   Updated: 2020/09/30 03:37:09 by ivan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,39 +49,35 @@ void		destroy_points(t_point **begin)
 			free(temp1);
 			temp1 = temp2;
 		}
+		*begin = NULL;
 	}
 }
 
-/*
-** t_point		*create_point(char *z)
-** {
-** 	char	**z_data;
-** 	t_point	*point;
-**
-** 	if (!(point = (t_point *)malloc(sizeof(t_point))))
-** 		return (NULL);
-** 	if (!(z_data = ft_strsplit(z, ',')) || count_str(z_data) > 2)
-** 	{
-** 		// free_point(point); // panic?
-** 		// free(point); // panic?
-** 		return (NULL);
-** 	}
-** 	if (isnan_base(z_data[0], 10) || (z_data[1] && isnan_base(z_data[1], 16)))
-** 	{
-** 		// free_point(point); // panic?
-** 		// free(point); // panic?
-** 		return (NULL);
-** 	}
-** 	point->z = ft_atoi(z_data[0]);
-** 	return (NULL); //
-** }
-*/
+int			convert_points(t_point *points, t_map *map)
+{
+	t_point	*temp;
+	int		count_points;
+	int		x;
+	int		y;
 
-/*
-** void		free_point(t_point *point)
-** {
-** 	free(point->cnt_pnts);
-** 	free(point);
-** 	point = NULL;
-** }
-*/
+	temp = points;
+	count_points = map->width * map->height;
+	if (!(map->ar_pnts = (t_point *)malloc(sizeof(t_point) * count_points)))
+		return (-1);
+	y = map->height - 1;
+	while (temp)
+	{
+		count_points--;
+		x = count_points % map->width;
+		map->ar_pnts[count_points].x = x;
+		map->ar_pnts[count_points].y = y;
+		map->ar_pnts[count_points].z = temp->z;
+		map->ar_pnts[count_points].color = temp->color;
+		if (x == 0)
+			y--;
+		temp = temp->next;
+	}
+	if (temp)
+		return (-1);
+	return (0);
+}

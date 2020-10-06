@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waddam <waddam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ivan <ivan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/01 22:59:12 by waddam            #+#    #+#             */
-/*   Updated: 2020/03/04 00:38:16 by waddam           ###   ########.fr       */
+/*   Created: 2020/03/01 22:59:12 by draudrau          #+#    #+#             */
+/*   Updated: 2020/09/30 03:18:00 by ivan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
-// #include "../includes/fdf.h"
 
 static void	pre_isnan(const char **str, int base)
 {
@@ -62,9 +61,16 @@ static int	check_z(char *z_str, int *z_val, int *color)
 	char	**z_data;
 
 	if (!(z_data = ft_strsplit(z_str, ',')) || count_str(z_data) > 2)
+	{
+		if (count_str(z_data) > 2)
+			free_multiline(&z_data);
 		return (-1);
+	}
 	if (isnan_base(z_data[0], 10) || (z_data[1] && isnan_base(z_data[1], 16)))
+	{
+		free_multiline(&z_data);
 		return (-1);
+	}
 	*z_val = ft_atoi(z_data[0]);
 	*color = z_data[1] ? ft_atoi_base(z_data[1], 16) : -1;
 	free_multiline(&z_data);
@@ -81,20 +87,16 @@ int			parsing(char **z_line, t_point **begin, t_map *map)
 	width = 0;
 	while (*(z_line + width))
 	{
-		if (check_z(*z_line, &z, &color) == -1)
-		{
-			if (!(point = create_point(0, 0, z, color)))
-			{
-				destroy_points(begin);
-				return (-1);
-			}
-			add_point(begin, create_point(0, 0, z, color));
-		}
+		if ((check_z(*(z_line + width), &z, &color) == -1)
+		|| !(point = create_point(0, 0, z, color)))
+			return (-1);
+		add_point(begin, point);
 		width++;
 	}
 	if (map->height == 0)
 		map->width = width;
 	if (map->width != width)
 		return (-1);
+	map->height++;
 	return (0);
 }

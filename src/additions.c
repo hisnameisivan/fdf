@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   additions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waddam <waddam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ivan <ivan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 22:55:07 by waddam            #+#    #+#             */
-/*   Updated: 2020/03/04 00:35:48 by waddam           ###   ########.fr       */
+/*   Updated: 2020/09/30 03:24:25 by ivan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
-// #include "../includes/fdf.h"
+
+void	panic(char *msg, t_point **points, t_map *map)
+{
+	ft_putendl_fd(msg, 2);
+	destroy_points(points);
+	if (map && map->ar_pnts)
+		free(map->ar_pnts);
+	exit(1);
+}
 
 void	free_multiline(char ***multiline)
 {
@@ -27,5 +35,18 @@ void	free_multiline(char ***multiline)
 		}
 		free(*multiline);
 		*multiline = NULL;
+	}
+}
+
+void	memintset(void *b, int c, size_t len)
+{
+	int		*temp;
+
+	temp = (int *)b;
+	while (len > 0)
+	{
+		*temp = c;
+		temp++;
+		len--;
 	}
 }
